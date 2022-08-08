@@ -35,7 +35,7 @@ button:hover{
 
 .output-display{
     grid-column: span 4;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -53,13 +53,15 @@ button:hover{
 .previouse-ops{
     color: #d0d9e3;
     font-size: 20px;    
-    margin: 1rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: row;
 }
 
-.current-ops{
+.result{
    color: #ffffff;
     font-size: 26px;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 footer{
