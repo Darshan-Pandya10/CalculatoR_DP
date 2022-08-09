@@ -8,7 +8,8 @@ const Buttons = Array.from(document.querySelectorAll('.number'));
 const operations = Array.from(document.querySelectorAll('.operation'));
 const equal = document.querySelector('.equal');
 const dot = document.querySelector('.dot');
-const allClear = document.querySelector('.allclear')
+const allClear = document.querySelector('.allclear');
+const del = document.querySelector('.delete');
 
 operations.forEach(operation => {
     operation.addEventListener('click' , (e) => {
@@ -27,37 +28,35 @@ Buttons.forEach(button => {
 
         else
         firstNumber.innerText += e.target.innerText;
+
     })
 })
-
 
 
 dot.addEventListener('click', (e) => {
     
     if(firstNumber.innerText.includes('.') && e.target.innerText === '.')
-            return
-        
+    
+    return
+   
     else
     firstNumber.innerText += e.target.innerText;
-
-
-//    switch(secondNumber.innerText.includes('.') && e.target.innerText === '.')
-//    {
-//     case true:
-//         return
-
-//         default : 
-//         secondNumber.innerText += e.target.innerText;
-
-//    }
-
 })
-
-
-
 
 equal.addEventListener('click' , () => {
     calculate();
+
+    if(resultDisplay.innerText !== ''){
+        firstNumber.innerText = resultDisplay.innerText;
+        secondNumber.innerText = '';
+        operator.innerText = '';
+
+        operations.forEach(operation => {
+            operation.addEventListener('click' , () => {
+                resultDisplay.innerText = '';
+            })
+        })
+    }
 })
 
 function calculate(){
@@ -90,6 +89,31 @@ allClear.addEventListener('click' , () => {
     secondNumber.innerText = '';
     operator.innerText = '';
     resultDisplay.innerText = ''
+
+})
+
+del.addEventListener('click' , () => {
+
+    if(firstNumber.innerText !== '' && operator.innerText == '' && secondNumber.innerText == ''){
+        firstNumber.innerText = firstNumber.innerText.slice(0, -1);
+    }
+
+    else if(firstNumber.innerText !== '' && operator.innerText !=='' && secondNumber.innerText == ''){
+              operator.innerText = operator.innerText.slice(0, -1);
+            //   after operator.innerText went to null it immediatety fires this if block which is taking firstNumber getting deleted too.
+            if(operator.innerText == '' && firstNumber.innerText !== ''){
+                firstNumber.innerText = firstNumber.innerText.slice(0, -1);
+            }
+            }
+            
+        else if(firstNumber.innerText !== '' && operator.innerText !=='' && secondNumber.innerText !== ''){
+
+         secondNumber.innerText = secondNumber.innerText.slice(0, -1);
+         if(secondNumber.innerText == '' && operator.innerText !== '')
+         operator.innerText = operator.innerText.slice(0, -1);
+         if( secondNumber.innerText == '' && operator.innerText == '')
+         firstNumber.innerText = firstNumber.innerText.slice(0, -1);
+        }
 
 })
 
